@@ -1,0 +1,41 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+a {
+    color: #ef0062;
+}
+.panel-default > .panel-heading {
+    color: #b00000;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #b00000;
+}
+
+.form-control:focus { 
+    border-color: #fff0e9 !important;
+}
+
+.form-control:focus { 
+    border-color: #ffcdb6 !important;
+}
+
+.btn-primary{
+    color: #fff;
+    background-color: #ff030b;
+    border-color: #fff0e9;
+}
+
+.btn-link {
+    color: #d1303f;
+    font-weight: normal;
+    border-radius: 0;
+}
