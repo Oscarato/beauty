@@ -67,6 +67,9 @@
                                 </ul>
                             </li>
                         @endif
+                            <li>
+                                <a href="{{ url('/add_order') }}">{{ __('auth.add_order') }}</a>
+                            </li>
                     </ul>
                 </div>
             </div>

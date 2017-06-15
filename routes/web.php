@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/add_order', 'ProductController@add_order');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

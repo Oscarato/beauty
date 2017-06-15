@@ -32,6 +32,7 @@ return [
     'confirm_password' => 'Confirmar Contraseña',
     'failed' => 'Estas credenciales no coinciden con nuestros registros.',
     'throttle' => 'Demasiados intentos de inicio de sesión. Inténtalo de nuevo en segundos segundos.',
-    'register' => 'Registrarse'
+    'register' => 'Registrarse',
+    'welcome' => 'Bienvenido!!, este es nuestro formulario para que puedas ser parte de nosotros y nos ayudes a llegar a las personas que nos necesiten, ofreciendo servicios de belleza a domicilio. Te invitamos a llenar este formulario y bienvenido nuevamente :") '
 
 ];

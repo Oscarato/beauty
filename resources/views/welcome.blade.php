@@ -130,8 +130,9 @@
                     @else
                         <a href="{{ url('/login') }}">{{ __('auth.login') }} </a>
                         <a href="{{ url('/register') }}">{{ __('auth.register') }}</a>
-                        <a href="{{ url('/add_order') }}">{{ __('auth.add_order') }}</a>
                     @endif
+                    
+                    <a href="{{ url('/add_order') }}">{{ __('auth.add_order') }}</a>
                 </div>
             @endif
             

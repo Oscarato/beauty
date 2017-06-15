@@ -31,5 +31,6 @@ return [
     'confirm_password' => 'Confirm Password',
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'register' => 'Register'
+    'register' => 'Register',
+    'welcome' => 'Welcome !!, this is our form so you can be part of us and help us reach the people who need us, offering beauty services at home. We invite you to fill out this form and welcome again :") '
 ];

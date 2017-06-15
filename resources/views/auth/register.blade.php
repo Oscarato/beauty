@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="app">
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -10,9 +10,9 @@
                 
                 <br>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <p>
-                        Bienvenido!!, este es nuestro formulario para que puedas ser parte de nosotros y nos ayudes a llegar a las personas que nos necesiten, ofreciendo servicios de belleza a domicilio. Te invitamos a llenar este formulario y bienvenido nuevamente :') 
+                        {{__('auth.welcome')}}
                     </p>
                 </div>
 
@@ -43,6 +43,20 @@
                                 @if ($errors->has('lastname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">{{ __('auth.email') }} (*)</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required >
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
