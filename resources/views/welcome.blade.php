@@ -126,13 +126,13 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Logros</a>
                     @else
                         <a href="{{ url('/login') }}">{{ __('auth.login') }} </a>
                         <a href="{{ url('/register') }}">{{ __('auth.register') }}</a>
                     @endif
                     
-                    <a href="{{ url('/add_order') }}">{{ __('auth.add_order') }}</a>
+                    <a href="{{ url('/orders') }}">{{ __('auth.add_order') }}</a>
                 </div>
             @endif
             

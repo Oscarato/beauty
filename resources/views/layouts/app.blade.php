@@ -54,10 +54,20 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ route('home') }}">
+                                            Logros
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('services') }}">
+                                            Servicios y/o Promociones
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Salir de la Plataforma
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -68,7 +78,7 @@
                             </li>
                         @endif
                             <li>
-                                <a href="{{ url('/add_order') }}">{{ __('auth.add_order') }}</a>
+                                <a href="{{ url('/orders') }}">{{ __('service.get_service') }}</a>
                             </li>
                     </ul>
                 </div>

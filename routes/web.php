@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add_order', 'ProductController@add_order');
+Route::get('/orders', 'ProductController@order');
+
+Route::post('/add_order', 'ProductController@add_order');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/services', 'ServicesController@services')->name('services');
 
