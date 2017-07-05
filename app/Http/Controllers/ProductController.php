@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
+use App\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -26,7 +27,9 @@ class ProductController extends Controller
      */
     public function order()
     {   
-        return view('order', ['user' => 1]);
+        $services = new Services;
+        $servicesData = $services->getServices();
+        return view('order', ['services' => $servicesData]);
     }
 
     /**

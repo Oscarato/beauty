@@ -11,7 +11,7 @@
 
                     <div class="row center-block">
                         <div class="col-md-6"><b>Comisión:</b> <span class="bg-success"> $ 500.000 </span> </div>
-                        <div class="col-md-6"><b>Servicios Registrados:</b> <span class="bg-info"> 10 </span></div>
+                        <div class="col-md-6"><b>Servicios Registrados:</b> <span class="bg-info"> {{count($orders)}}</span></div>
                         <hr>
                         <br>
                         <div class="col-md-12">
@@ -38,6 +38,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Servicio</th>
+                                    <th>Asociado</th>
                                     <th>Cliente</th>
                                     <th>Fecha del Servicio</th>
                                     <th>Hora del Servicio</th>
@@ -45,67 +46,32 @@
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
-                                <tr>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td class="active">...</td>
-                                    <td >
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                Selecciona
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li><a href="#">Editar</a></li>
-                                                <li><a href="#">Borrar</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td class="success">...</td>
-                                    <td >...</td>
-                                </tr>
-                                <tr>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td class="active">...</td>
-                                    <td >...</td>
-                                </tr>
-                                <tr>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td class="active">...</td>
-                                    <td >...</td>
-                                </tr>
-                                <tr>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td >...</td>
-                                    <td class="success">...</td>
-                                    <td >...</td>
-                                </tr>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td >{{$order->order_id}}</td>
+                                        <td >{{$order->service_name}}</td>
+                                        <td> {{$order->user_name}} </td>
+                                        <td >{{$order->client_name}}</td>
+                                        <td >{{$order->date_service}}</td>
+                                        <td >{{$order->hour_service}}</td>
+                                        <td >{{$order->creation_date}}</td>
+                                        <td class="{{status_orders($order->status)}}">{{$order->status_name}}</td>
+                                        <td >
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu{{$order->order_id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Selecciona
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu{{$order->order_id}}">
+                                                    <li><a href="#">Editar</a></li>
+                                                    <li><a href="#">Borrar</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+                                
                             </table>
                         </div>
                     </div>

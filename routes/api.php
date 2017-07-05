@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckToken;
+use App\Services;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(CheckToken::class)->get('/services', function (Request $request) {
+    $services = new Services;
+    $servicesData = $services->getServices();
+    
+    return json_encode($servicesData);
 });

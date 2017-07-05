@@ -25,3 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/services', 'ServicesController@services')->name('services');
 
+Route::post('/add_service', 'ServicesController@add_service');
+
+Route::post('/update_service', 'ServicesController@update_service');
+
+
+

@@ -2,9 +2,64 @@
 
 namespace App;
 
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
 
 class Services extends Model
 {
-    //
+
+    const CREATED_AT = 'creation_date';
+    const UPDATED_AT = 'last_update';
+
+    //traemos los servicios existentes
+    public function create(Request $request){
+        $this->name = $request['name_service'];
+        $this->promotion = $request['promotion'];
+        $this->discount = $request['discount_service'];
+        $this->validity = $request['validity_service'];
+        $this->value = $request['value_service'];
+        $this->status = 1;
+        
+        if($this->save()){
+            return array('success' => true, 'last_insert_id' => $this->id);
+        }else{
+            return array('success' => false);
+        }
+    }
+
+    public function getServices(){
+        return DB::table('services')
+        ->join('images', 'services.id', '=', 'images.id_associate')
+        ->join('status_services', 'services.status', '=', 'status_services.id')
+        ->select('services.id as service_id', 'images.name as image_name', 'services.name as service_name', 'services.promotion', 'services.discount', 'services.validity', 'services.value', 'services.status', 'status_services.name as status_name')
+        ->where('images.status', 1)
+        ->get();
+    }
+
+    public function gerStatusServices(){
+        return DB::table('status_services')
+        ->select('id', 'name')
+        ->get();
+    }
+
+    //para actualizar
+    public function updateService(Request $request){
+        
+        $service = $this::find($request['_id']);
+        
+        $service->name = $request['name_service'];
+        $service->promotion = $request['promotion'];
+        $service->discount = $request['discount_service'];
+        $service->validity = $request['validity_service'];
+        $service->value = $request['value_service'];
+        $service->status = $request['status'];
+        
+        if($service->save()){
+            return array('success' => true, 'last_insert_id' => $request['_id']);
+        }else{
+            return array('success' => false);
+        }
+    }
 }

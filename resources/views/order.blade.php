@@ -4,13 +4,11 @@
 
 @if(session('message'))
     @if(session('status') == 'success')
-        <div class="alert alert-success">{{session('alert-success')}}</div>
+        <div class="alert alert-success">{{session('message')}}</div>
     @else
-        <div class="alert alert-danger">{{session('alert-success')}}</div>
+        <div class="alert alert-danger">{{session('message')}}</div>
     @endif
 @endif
-
-<?php echo $user; ?>
 
 <div class="container">
     <div class="row">
@@ -59,9 +57,9 @@
 
                             <div class="col-md-6">
                                 <select id="service" name="service" value="{{ old('service') }}" required class="form-control">
-                                    <option value="1">Servicio 1</option>
-                                    <option value="2">Servicio 2</option>
-                                    <option value="3">Servicio 3</option>
+                                    @foreach($services as $service)
+                                        <option value="{{$service->service_id}}">{{$service->service_name}}</option>
+                                    @endforeach
                                 </select>
 
                                 @if ($errors->has('email'))
@@ -191,6 +189,36 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar Servicio</h4>
+            </div>
+             <form action="add_service" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="modal-body">
+                
+                    <div class="form-group">
+                        <label for="text_prom">Promoción</label>
+                        <textarea class="form-control" id="text_prom" name="promotion" ></textarea>
+                    </div>
+                    
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit"  class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
