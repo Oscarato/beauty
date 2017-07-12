@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="favicon.ico">
 
-        <title>Be - @yield('title')</title>
+        <title>Be - Beauty</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -131,8 +131,10 @@
                         <a href="{{ url('/login') }}">{{ __('auth.login') }} </a>
                         <a href="{{ url('/register') }}">{{ __('auth.register') }}</a>
                     @endif
-                    
+
+                    <a href="{{ url('/catalog') }}">Catálogo</a>
                     <a href="{{ url('/orders') }}">{{ __('auth.add_order') }}</a>
+                    
                 </div>
             @endif
             

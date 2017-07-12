@@ -95,7 +95,6 @@
     </div>
 </div>
 
-
 <!-- Modal para editar -->
 <div class="modal fade" id="modalEdit" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -120,7 +119,7 @@
                     </div>
                     <div class="form-group">
                         <label for="discount_service">Descuento en %</label>
-                        <input type="number" name="discount_service" :value="selectedData.discount"  class="form-control" id="discount_service" placeholder="Descuento en %">
+                        <input type="number" name="discount_service" v-model="discount_service_edit"  class="form-control" id="discount_service" placeholder="Descuento en %">
                     </div>
                     <div class="form-group">
                         <label for="validity_service">Vigencia</label>
@@ -128,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <label for="value_service">Valor</label>
-                        <input type="number" name="value_service" :value="selectedData.value" class="form-control" id="value_service" placeholder="Valor">
+                        <input type="number" name="value_service" v-model="value_service_edit" class="form-control" id="value_service" placeholder="Valor">
                     </div>
                     
                     <div class="form-group bg-info">
@@ -138,6 +137,16 @@
                                 <option value="{{$status->id}}">{{$status->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="real">Valor Real</label>
+                        <input type="text" readonly class="form-control" id="real" :value="value_service_edit - ((discount_service_edit * value_service_edit) / 100)" placeholder="Valor Real">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment_url">Url de Pago</label>
+                        <input type="text" class="form-control" name="payment_url" :value="selectedData.payment_url"  id="payment_url" placeholder="URL de Pago">
                     </div>
 
                     <div class="form-group">
@@ -179,7 +188,7 @@
                     </div>
                     <div class="form-group">
                         <label for="discount_service">Descuento en %</label>
-                        <input type="number" name="discount_service" class="form-control" id="discount_service" placeholder="Descuento en %">
+                        <input type="number" name="discount_service"  v-model="discount_service" class="form-control" id="discount_service" placeholder="Descuento en %">
                     </div>
                     <div class="form-group">
                         <label for="validity_service">Vigencia</label>
@@ -187,11 +196,22 @@
                     </div>
                     <div class="form-group">
                         <label for="value_service">Valor</label>
-                        <input type="number" name="value_service" class="form-control" id="value_service" placeholder="Valor">
+                        <input type="number" name="value_service" v-model="value_service" class="form-control" id="value_service" placeholder="Valor">
                     </div>
+
+                    <div class="form-group">
+                        <label for="real">Valor Real</label>
+                        <input type="number" readonly class="form-control" id="real" :value="value_service - ((value_service *discount_service) / 100)" placeholder="Valor Real">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment_url">Url de Pago</label>
+                        <input type="text" name="payment_url" class="form-control" id="payment_url" placeholder="URL de Pago">
+                    </div>
+
                     <div class="form-group">
                         <label for="image_service">Imagen de Promoción</label>
-                        <input type="file" accept="image/*" name="image_service" id="image_service">
+                        <input type="file" accept="image/*" name="image_service" id="image_service" required>
                     </div>
                     
                 </div>

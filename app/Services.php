@@ -20,6 +20,8 @@ class Services extends Model
         $this->discount = $request['discount_service'];
         $this->validity = $request['validity_service'];
         $this->value = $request['value_service'];
+        $this->payment_url = $request['payment_url'];
+
         $this->status = 1;
         
         if($this->save()){
@@ -33,8 +35,18 @@ class Services extends Model
         return DB::table('services')
         ->join('images', 'services.id', '=', 'images.id_associate')
         ->join('status_services', 'services.status', '=', 'status_services.id')
-        ->select('services.id as service_id', 'images.name as image_name', 'services.name as service_name', 'services.promotion', 'services.discount', 'services.validity', 'services.value', 'services.status', 'status_services.name as status_name')
+        ->select('services.id as service_id', 'images.name as image_name', 'services.name as service_name', 'services.promotion', 'services.payment_url', 'services.discount', 'services.validity', 'services.value', 'services.status', 'status_services.name as status_name')
         ->where('images.status', 1)
+        ->get();
+    }
+
+    public function getServicesById($id=null){
+        return DB::table('services')
+        ->join('images', 'services.id', '=', 'images.id_associate')
+        ->join('status_services', 'services.status', '=', 'status_services.id')
+        ->select('services.id as service_id', 'images.name as image_name', 'services.name as service_name', 'services.promotion', 'services.payment_url', 'services.discount', 'services.validity', 'services.value', 'services.status', 'status_services.name as status_name')
+        ->where('images.status', 1)
+        ->where('services.id', $id)
         ->get();
     }
 
@@ -54,6 +66,7 @@ class Services extends Model
         $service->discount = $request['discount_service'];
         $service->validity = $request['validity_service'];
         $service->value = $request['value_service'];
+        $service->payment_url = $request['payment_url'];
         $service->status = $request['status'];
         
         if($service->save()){

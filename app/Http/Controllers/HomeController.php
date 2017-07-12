@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
+use App\Services;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,9 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orders = new Orders;
-        $orders = $orders->getOrders();
-        return view('home', ['orders' => $orders]);
+        $ordersClass = new Orders;
+        $statusOrders = $ordersClass->getStatusOrders();
+        $orders = $ordersClass->getOrders();
+
+        //analisamos las posibles comisiones
+        $commission = $ordersClass->getCommission();
+        
+        return view('home', ['orders' => $orders, 'statusOrders' => $statusOrders, 'commission' => $commission]);
     }
 
 }

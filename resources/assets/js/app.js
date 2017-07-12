@@ -25,7 +25,7 @@ Vue.filter("formatNumber", function (value) {
 });
 
 const api = axios.create({
-    baseURL: 'http://localhost/be_platform/public/',
+    baseURL: 'http://127.0.0.1:8000',
     headers: {
         common: {
             'Accept': 'application/json',
@@ -48,13 +48,24 @@ const app = new Vue({
             city: 0,
             images: 6,
             servicesData:[],
-            selectedData:{}
+            selectedData:{},
+            selectOrder:{},
+            ordersData: [],
+            discount_service : 0,
+            value_service : 0,
+            discount_service_edit : 0,
+            value_service_edit : 0
         }
     },
     methods:{
         setEditService(data){
-            console.log(data)
-            this.selectedData = data;
+            this.selectedData = Object.assign({}, data);
+            this.discount_service_edit = data.discount
+            this.value_service_edit = data.value
+            return;
+        },
+        setEditOrder(data){
+            this.selectOrder = Object.assign({}, data);
             return;
         },
         getServices(){
@@ -62,6 +73,16 @@ const app = new Vue({
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.servicesData = response.data
+            })
+            .catch(e => {
+                console.log(e)
+            })
+        },
+        getOrders(){
+            api.get('api/orders')
+            .then(response => {
+                // JSON responses are automatically parsed.
+                this.ordersData = response.data
             })
             .catch(e => {
                 console.log(e)
@@ -107,6 +128,10 @@ const app = new Vue({
     },
     created(){
         this.getServices();
+        this.getOrders();
+    },
+    mounted(){
+        $('#showProm').modal('show')
     }
 });
 

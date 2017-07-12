@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Middleware\CheckToken;
 use App\Services;
+use App\Orders;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,11 @@ Route::middleware(CheckToken::class)->get('/services', function (Request $reques
     $servicesData = $services->getServices();
     
     return json_encode($servicesData);
+});
+
+Route::middleware(CheckToken::class)->get('/orders', function (Request $request) {
+    $orders = new Orders;
+    $ordersData = $orders->getOrders();
+    
+    return json_encode($ordersData);
 });

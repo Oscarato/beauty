@@ -56,12 +56,24 @@
                             <label for="email" class="col-md-4 control-label">Servicio adquirido (*)</label>
 
                             <div class="col-md-6">
-                                <select id="service" name="service" value="{{ old('service') }}" required class="form-control">
-                                    @foreach($services as $service)
-                                        <option value="{{$service->service_id}}">{{$service->service_name}}</option>
-                                    @endforeach
-                                </select>
-
+                                @if(isset($_GET['service']))
+                                
+                                    <select id="service" name="service" onchange="location  = 'orders?service='+this.options[this.selectedIndex].value" value="{{ $_GET['service'] }}" required class="form-control">
+                                        @foreach($services as $service)
+                                            @if($service->service_id == $_GET['service'])
+                                                <option value="{{$service->service_id}}" selected>{{$service->service_name}}</option>
+                                            @else
+                                                <option value="{{$service->service_id}}">{{$service->service_name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <select id="service" name="service" onchange="location  = 'orders?service='+this.options[this.selectedIndex].value" value="{{ old('service') }}" required class="form-control">
+                                        @foreach($services as $service)
+                                            <option value="{{$service->service_id}}">{{$service->service_name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -69,6 +81,29 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        @if(isset($serviceData[0]))
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="email" class="col-md-4 control-label">Costo:</label>
+                                    <span class="help-block">
+                                        $ {{formatNumber($serviceData[0]->value - (($serviceData[0]->value * $serviceData[0]->discount / 100)))}}
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(isset($serviceData[0]))
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="email" class="col-md-4 control-label">Descripción:</label>
+                                    <span class="help-block">
+                                        {{$serviceData[0]->promotion}}
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nombre completo del cliente (*)</label>

@@ -12,6 +12,11 @@
 a {
     color: #ef0062;
 }
+a:hover, a:focus {
+    color: #ef0062;
+    text-decoration: underline;
+}
+
 .panel-default > .panel-heading {
     color: #b00000;
 }
@@ -38,4 +43,20 @@ a {
     color: #d1303f;
     font-weight: normal;
     border-radius: 0;
+}
+
+.carousel-inner > .item {
+    padding: 0 0 0 154px;
+}
+
+h3, .h3 {
+    color: #f01f1f;
+    font-family: Dancing Script;
+}
+
+p {
+    color: #b00000;
+}
+.carousel-caption {
+    text-align: right;
 }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Be') }}</title>
+    <title>{{ config('app.name', 'Be - Beauty') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -77,6 +77,9 @@
                                 </ul>
                             </li>
                         @endif
+                            <li>
+                                <a href="{{ url('/catalog') }}">Catálogo</a>
+                            </li>
                             <li>
                                 <a href="{{ url('/orders') }}">{{ __('service.get_service') }}</a>
                             </li>
