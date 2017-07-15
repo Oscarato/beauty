@@ -152,10 +152,10 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img width="150" src="img/mujer.png" class="img-circle">
+                                        <img width="150" src="img/mujer.PNG" class="img-circle">
                                     </div>
                                     <div class="item">
-                                        <img width="150" src="img/mujer2.png" class="img-circle" >
+                                        <img width="150" src="img/mujer2.PNG" class="img-circle" >
                                     </div>
                                     
                                 </div>

@@ -10,8 +10,8 @@
                 <div class="panel-body">
 
                     <div class="row center-block">
-                        <div class="col-md-6"><b>Comisión:</b> <span class="bg-success"> $ 500.000 </span> </div>
-                        <div class="col-md-6"><b>Servicios Registrados:</b> <span class="bg-info"> {{count($orders)}}</span></div>
+                        <div class="col-md-6"><b>Comisión:</b> <span class="bg-success"> $ {{isset($commission[0]) ? formatNumber($commission[0]->value):0}} </span> </div>
+                        <div class="col-md-6"><b>Servicios Registrados:</b> <span class="bg-info"> @{{ordersData.length}}</span></div>
                         <hr>
                         <br>
                         <div class="col-md-12">
@@ -56,6 +56,7 @@
                                     <td > @{{order.date_service}}</td>
                                     <td > @{{order.hour_service}}</td>
                                     <td > @{{order.creation_date}}</td>
+                                     @if(Auth::user()->profile == 1)
                                     <td  v-bind:class="status_orders(order.status)"> @{{order.status_name}} </td>
                                     <td >
                                         <div class="dropdown">
@@ -70,6 +71,7 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                                 
                             </table>
@@ -89,10 +91,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Cambiar Estado de Servicio</h4>
             </div>
-            <form id="updateForm" action="update_service" method="post" enctype="multipart/form-data">
+            <form id="updateForm" action="update_order_status" method="post">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="_id" :value="selectOrder.service_id">
+                <input type="hidden" name="_id" :value="selectOrder.order_id">
 
                 <div class="modal-body">
 

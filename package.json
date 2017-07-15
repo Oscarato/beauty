@@ -20,6 +20,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "numeral": "^2.0.6"
+    "numeral": "^2.0.6",
+    "vue-localstorage": "^0.3.0"
   }
 }

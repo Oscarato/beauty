@@ -11,6 +11,9 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import axios from 'axios';
 import numeral from "numeral"
+import VueLocalStorage from 'vue-localstorage';
+
+Vue.use(VueLocalStorage)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -24,12 +27,20 @@ Vue.filter("formatNumber", function (value) {
   return numeral(value).format("0,0"); 
 });
 
+//var url = 'http://asociadosbe.com';
+var url = 'http://localhost:8000';
+
+var options = {
+    namespace: 'beuaty__'
+};
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: url,
     headers: {
         common: {
             'Accept': 'application/json',
-            'Authorization': "Beauty "
+            'content-type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Authorization': "Beauty "+Vue.localStorage.get('token')
         },
         post: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -54,7 +65,10 @@ const app = new Vue({
             discount_service : 0,
             value_service : 0,
             discount_service_edit : 0,
-            value_service_edit : 0
+            value_service_edit : 0,
+            email: '',
+            password: '',
+            messageLogin: ''
         }
     },
     methods:{
@@ -65,6 +79,7 @@ const app = new Vue({
             return;
         },
         setEditOrder(data){
+            console.log(data)
             this.selectOrder = Object.assign({}, data);
             return;
         },
@@ -124,6 +139,33 @@ const app = new Vue({
             }
 
             return status;
+        },
+        submit(e) {
+            if(this.email =='' || this.password == ''){
+                $("#sendLogin").submit()
+            }else{
+                api.post('api/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    var res = response.data
+                    if(res.response){
+                        Vue.localStorage.set('token', res.data.token);
+                        this.messageLogin = res.message
+                        $("#sendLogin").submit()
+                    }else{
+                        this.messageLogin = res.message
+                        $("#sendLogin").submit()
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+                return;
+            }
+
         }
     },
     created(){

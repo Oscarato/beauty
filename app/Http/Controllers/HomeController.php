@@ -27,12 +27,11 @@ class HomeController extends Controller
     {
         $ordersClass = new Orders;
         $statusOrders = $ordersClass->getStatusOrders();
-        $orders = $ordersClass->getOrders();
 
         //analisamos las posibles comisiones
         $commission = $ordersClass->getCommission();
         
-        return view('home', ['orders' => $orders, 'statusOrders' => $statusOrders, 'commission' => $commission]);
+        return view('home', ['statusOrders' => $statusOrders, 'commission' => $commission]);
     }
 
 }
