@@ -10887,8 +10887,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter("formatNumber", function (val
     return __WEBPACK_IMPORTED_MODULE_2_numeral___default()(value).format("0,0");
 });
 
-//var url = 'http://asociadosbe.com';
-var url = 'http://localhost:8000';
+var url = 'http://asociadosbe.com';
+//var url = 'http://localhost:8000';
 var token = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.localStorage.get('token');
 token = token ? token : '';
 

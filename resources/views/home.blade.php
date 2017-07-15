@@ -45,7 +45,9 @@
                                     <th>Hora del Servicio</th>
                                     <th>Fecha de Solicitud</th>
                                     <th>Estado</th>
+                                    @if(Auth::user()->profile == 1)
                                     <th>Acciones</th>
+                                    @endif
                                 </tr>
                                 
                                 <tr v-for="order in ordersData">
@@ -56,8 +58,9 @@
                                     <td > @{{order.date_service}}</td>
                                     <td > @{{order.hour_service}}</td>
                                     <td > @{{order.creation_date}}</td>
-                                     @if(Auth::user()->profile == 1)
                                     <td  v-bind:class="status_orders(order.status)"> @{{order.status_name}} </td>
+                                    
+                                    @if(Auth::user()->profile == 1)
                                     <td >
                                         <div class="dropdown">
                                             <button class="btn btn-default dropdown-toggle" type="button" :id="'dropdownMenu' + order.order_id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
