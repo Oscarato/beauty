@@ -24,16 +24,14 @@ class CheckToken
         if($all_headers){
             $token = isset(explode('Beauty', $all_headers)[1]) ? explode('Beauty', $all_headers)[1]:null;
 
-            $data = new ValidationData(); // It will use the current time to validate (iat, nbf and exp)
-            $data->setIssuer('http://www.be.land');
-            $data->setAudience('http://www.be.land');
-            $data->setId('bd273e238dc03056fff93c0e1e8de576');
-
             if($token){
 
+                $data = new ValidationData(); // It will use the current time to validate (iat, nbf and exp)
+                $data->setIssuer('http://www.be.land');
+                $data->setAudience('http://www.be.land');
+                $data->setId('bd273e238dc03056fff93c0e1e8de576');
+                
                 $token = (new Parser())->parse((string) $token); // Parses from a string
-                $token->getHeaders(); // Retrieves the token header
-                $token->getClaims(); // Retrieves the token claims
 
                 if($token->validate($data)){
                     

@@ -29,10 +29,9 @@ Vue.filter("formatNumber", function (value) {
 
 //var url = 'http://asociadosbe.com';
 var url = 'http://localhost:8000';
+var token = Vue.localStorage.get('token');
+token = token ? token:'';
 
-var options = {
-    namespace: 'beuaty__'
-};
 const api = axios.create({
     baseURL: url,
     headers: {
@@ -40,7 +39,7 @@ const api = axios.create({
             'Accept': 'application/json',
             'content-type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
-            'Authorization': "Beauty "+Vue.localStorage.get('token')
+            'Authorization': "Beauty "+token
         },
         post: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -87,7 +86,11 @@ const app = new Vue({
             api.get('api/services')
             .then(response => {
                 // JSON responses are automatically parsed.
-                this.servicesData = response.data
+                var res = response.data
+                if(res.response){
+                    // JSON responses are automatically parsed.
+                    this.servicesData = res.data
+                }
             })
             .catch(e => {
                 console.log(e)
@@ -96,8 +99,12 @@ const app = new Vue({
         getOrders(){
             api.get('api/orders')
             .then(response => {
-                // JSON responses are automatically parsed.
-                this.ordersData = response.data
+                var res = response.data
+                if(res.response){
+                    // JSON responses are automatically parsed.
+                    this.ordersData = res.data
+                }
+
             })
             .catch(e => {
                 console.log(e)
@@ -166,6 +173,12 @@ const app = new Vue({
                 return;
             }
 
+        },
+        closeSe(e){
+            e.preventDefault();
+            Vue.localStorage.remove('token')
+            console.log('?')
+            $("#logout-form").submit()
         }
     },
     created(){
