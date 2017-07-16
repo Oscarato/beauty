@@ -63,7 +63,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+        /*
         # Instantiate the client\
         $mailin = new Mailin("https://api.sendinblue.com/v2.0","7t3U8p4HDKOWQXEm");
         $mailin->get_account();
@@ -89,6 +89,7 @@ class RegisterController extends Controller
         );
 
         $mailin->send_email($data);
+        */
         
         return User::create([
             'name' => $data['name'],
