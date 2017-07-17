@@ -180,6 +180,12 @@ const app = new Vue({
     created(){
         this.getServices();
         this.getOrders();
+        var host = window.location.href ;
+        if(host.split("/")[3] == 'home'){
+            if(token == ''){
+                $("#logout-form").submit()
+            }
+        }
     },
     mounted(){
         $('#showProm').modal('show')

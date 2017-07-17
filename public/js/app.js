@@ -11040,6 +11040,12 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     created: function created() {
         this.getServices();
         this.getOrders();
+        var host = window.location.href;
+        if (host.split("/")[3] == 'home') {
+            if (token == '') {
+                $("#logout-form").submit();
+            }
+        }
     },
     mounted: function mounted() {
         $('#showProm').modal('show');
