@@ -108,6 +108,33 @@
             .carousel{
                 height: 150px;
             }
+
+            @media (max-width: 600px) {
+                .logo {
+                    padding: 0px 4px 40px 0;
+                }
+
+                .top-right {
+                    position: absolute;
+                    right: 10px;
+                    top: 52px;
+                    padding: 30px 0 0 0;
+                }
+
+                .h1, h1 {
+                    font-size: 23px;
+                }
+
+                .nav, .nav-tabs {
+                    margin: 0 0 0 125px;
+                    font-family: -webkit-pictograph;
+                }
+
+                p {
+                    padding: 21px 96px 0 109px;
+                }
+            }
+
         </style>
 
         <script>
@@ -118,7 +145,7 @@
     </head>
     <body>
         <div class="logo">
-            <img width="80" src="<?php echo url('img/531.PNG') ?>"">
+            <img width="80" src="<?php echo url('img/531.png') ?>">
         </div>
         
         <div class="flex-center">
