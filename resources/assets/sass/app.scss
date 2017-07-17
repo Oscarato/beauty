@@ -57,6 +57,25 @@ h3, .h3 {
 p {
     color: #b00000;
 }
+
 .carousel-caption {
     text-align: right;
+}
+
+input, button, select, textarea {
+    font-family: sans-serif;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+@media (max-width: 600px) {
+
+    .carousel-inner > .item {
+        padding: 0;
+    }
+
+    .carousel-caption {
+        text-align: right;
+        top: 141px;
+    }
 }
