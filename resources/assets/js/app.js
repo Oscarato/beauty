@@ -27,8 +27,9 @@ Vue.filter("formatNumber", function (value) {
   return numeral(value).format("0,0"); 
 });
 
-var url = 'http://asociadosbe.com';
+var url = 'http://www.asociadosbe.com';
 //var url = 'http://localhost:8000';
+
 var token = Vue.localStorage.get('token');
 token = token ? token:'';
 
@@ -36,9 +37,7 @@ const api = axios.create({
     baseURL: url,
     headers: {
         common: {
-            'Accept': 'application/json',
             'content-type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
             'Authorization': "Beauty "+token
         },
         post: {

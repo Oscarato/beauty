@@ -118,7 +118,7 @@
     </head>
     <body>
         <div class="logo">
-            <img width="80" src="img/531.png">
+            <img width="80" src="<?php echo url('img/531.PNG') ?>"">
         </div>
         
         <div class="flex-center">

@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img width="40" src="img/531.png">
+                        <img width="40" src="<?php echo url('img/531.PNG') ?>">
                     </a>
                 </div>
 
