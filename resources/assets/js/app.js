@@ -27,7 +27,7 @@ Vue.filter("formatNumber", function (value) {
   return numeral(value).format("0,0"); 
 });
 
-var url = 'http://www.asociadosbe.com';
+var url = 'http://asociadosbe.com';
 //var url = 'http://localhost:8000';
 
 var token = Vue.localStorage.get('token');
@@ -77,7 +77,6 @@ const app = new Vue({
             return;
         },
         setEditOrder(data){
-            console.log(data)
             this.selectOrder = Object.assign({}, data);
             return;
         },
@@ -103,7 +102,6 @@ const app = new Vue({
                     // JSON responses are automatically parsed.
                     this.ordersData = res.data
                 }
-
             })
             .catch(e => {
                 console.log(e)
@@ -176,7 +174,6 @@ const app = new Vue({
         closeSe(e){
             e.preventDefault();
             Vue.localStorage.remove('token')
-            console.log('?')
             $("#logout-form").submit()
         }
     },

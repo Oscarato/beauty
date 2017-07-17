@@ -10887,7 +10887,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter("formatNumber", function (val
     return __WEBPACK_IMPORTED_MODULE_2_numeral___default()(value).format("0,0");
 });
 
-var url = 'http://www.asociadosbe.com';
+var url = 'http://asociadosbe.com';
 //var url = 'http://localhost:8000';
 
 var token = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.localStorage.get('token');
@@ -10938,7 +10938,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             return;
         },
         setEditOrder: function setEditOrder(data) {
-            console.log(data);
             this.selectOrder = Object.assign({}, data);
             return;
         },
@@ -11035,7 +11034,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         closeSe: function closeSe(e) {
             e.preventDefault();
             __WEBPACK_IMPORTED_MODULE_0_vue___default.a.localStorage.remove('token');
-            console.log('?');
             $("#logout-form").submit();
         }
     },
