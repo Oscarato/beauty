@@ -68,6 +68,10 @@ input, button, select, textarea {
     line-height: inherit;
 }
 
+.col-md-12 {
+    overflow: auto;
+}
+
 @media (max-width: 600px) {
 
     .carousel-inner > .item {

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 2525),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'asicuadosbe@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'asociados@be.com'),
         'name' => env('MAIL_FROM_NAME', 'Servicios Asociados Be'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => 'asicuadosbe@gmail.com',
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => '4085625734',
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

@@ -33,7 +33,6 @@
                         <hr>
                         <br>
                         <div class="col-md-12">
-                        
                             <!-- Table -->
                             <table class="table table-hover">
                                 <tr>
