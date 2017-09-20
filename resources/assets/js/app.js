@@ -24,12 +24,16 @@ Vue.filter("formatNumber", function (value) {
   return numeral(value).format("0,0"); 
 });
 
+//var url = 'http://asociadosbe.com';
+var url = 'http://localhost:8000';
+
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: url,
     headers: {
         common: {
             'Accept': 'application/json',
-            'Authorization': "Beauty "
+            'X-Requested-With': 'XMLHttpRequest',
+            'Authorization': "Beauty ",
         },
         post: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -71,8 +75,14 @@ const app = new Vue({
         getServices(){
             api.get('api/services')
             .then(response => {
-                // JSON responses are automatically parsed.
-                this.servicesData = response.data
+                
+                if(response){
+                    // JSON responses are automatically parsed.
+                    this.servicesData = response.data
+                }else{
+                    return window.location.replace('/')
+                }
+
             })
             .catch(e => {
                 console.log(e)

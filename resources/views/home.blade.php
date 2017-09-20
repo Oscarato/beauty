@@ -10,7 +10,7 @@
                 <div class="panel-body">
 
                     <div class="row center-block">
-                        <div class="col-md-6"><b>Comisión:</b> <span class="bg-success"> $ 500.000 </span> </div>
+                        <div class="col-md-6"><b>Comisión:</b> <span class="bg-success"> $ {{isset($commission[0]) ? formatNumber($commission[0]->value):0}} </span> </div>
                         <div class="col-md-6"><b>Servicios Registrados:</b> <span class="bg-info"> {{count($orders)}}</span></div>
                         <hr>
                         <br>

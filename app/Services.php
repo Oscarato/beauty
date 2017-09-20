@@ -32,12 +32,45 @@ class Services extends Model
     }
 
     public function getServices(){
+
+        //para filtro por nombre
+        $name = '';
+        if(isset($_GET['name_service'])){
+            $name = $_GET['name_service'];
+        }
+
+        //para las fechas
+        $year = date("Y");
+        $initDate = $year.'-01-01';
+        $endDate = $year.'-12-31';
+        if(isset($_GET['date_service'])){
+            if($_GET['date_service'] != ''){
+                $initDate = $_GET['date_service'];
+                $endDate = date('Y-m-d', strtotime("+1 months", strtotime($initDate)));
+            }
+        }
+        
+        DB::enableQueryLog();
+
+        /*
+        $query = "SELECT `services`.`id` as `service_id`, `images`.`name` as `image_name`, `services`.`name` as `service_name`, `services`.`promotion`, `services`.`payment_url`, `services`.`discount`, `services`.`validity`, `services`.`value`, `services`.`status`, `status_services`.`name` as `status_name` from `services` inner join `images` on `services`.`id` = `images`.`id_associate` inner join `status_services` on `services`.`status` = `status_services`.`id` where `images`.`status` = 1 and `services`.`name` LIKE '%$name%' and `services`.`creation_date` between '$initDate' and '$endDate' order by `services`.`name` asc";
+        
+        return $results = DB::select($query);
+        */
+
         return DB::table('services')
         ->join('images', 'services.id', '=', 'images.id_associate')
         ->join('status_services', 'services.status', '=', 'status_services.id')
         ->select('services.id as service_id', 'images.name as image_name', 'services.name as service_name', 'services.promotion', 'services.payment_url', 'services.discount', 'services.validity', 'services.value', 'services.status', 'status_services.name as status_name')
         ->where('images.status', 1)
+        ->where('services.name', 'LIKE', DB::raw("'%$name%'"))
+        ->whereBetween('services.creation_date', array( $initDate, $endDate))
+        ->orderBy('services.name', 'ASC')
         ->get();
+
+        $queries = DB::getQueryLog();
+        print_r($queries);
+        exit;
     }
 
     public function getServicesById($id=null){

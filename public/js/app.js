@@ -10507,11 +10507,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.filter("formatNumber", function (val
     return __WEBPACK_IMPORTED_MODULE_2_numeral___default()(value).format("0,0");
 });
 
+//var url = 'http://asociadosbe.com';
+var url = 'http://localhost:8000';
+
 var api = __WEBPACK_IMPORTED_MODULE_1_axios___default.a.create({
-    baseURL: 'http://127.0.0.1:8000',
+    baseURL: url,
     headers: {
         common: {
             'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
             'Authorization': "Beauty "
         },
         post: {
@@ -10556,8 +10560,13 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             var _this = this;
 
             api.get('api/services').then(function (response) {
-                // JSON responses are automatically parsed.
-                _this.servicesData = response.data;
+
+                if (response) {
+                    // JSON responses are automatically parsed.
+                    _this.servicesData = response.data;
+                } else {
+                    return window.location.replace('/');
+                }
             }).catch(function (e) {
                 console.log(e);
             });

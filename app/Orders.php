@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\Eloquent\Model;
+use Config;
 
 
 class Orders extends Model
@@ -54,7 +55,13 @@ class Orders extends Model
     }
 
     public function getCommission(){
-        return DB::select("select sum( ((services.value - ((services.value * services.discount)/100))*5)/100) value from orders inner join services on services.id = orders.service where orders.status = 2 AND orders.document = ". Auth::user()->document);
+
+        $comission = Config::get('app.comission');
+        if(is_null($comission)){
+            $comission = 9;
+        }
+
+        return DB::select("select sum( ((services.value - ((services.value * services.discount)/100))*$comission)/100) value from orders inner join services on services.id = orders.service where orders.status = 2 AND orders.document = ". Auth::user()->document);
     }
     
 }

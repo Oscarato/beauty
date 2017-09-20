@@ -58,11 +58,13 @@
                                             Logros
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('services') }}">
-                                            Servicios y/o Promociones
-                                        </a>
-                                    </li>
+                                    @if(Auth::user()->profile == 1)
+                                        <li>
+                                            <a href="{{ route('services') }}">
+                                                Servicios y/o Promociones
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
