@@ -11,6 +11,9 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import axios from 'axios';
 import numeral from "numeral"
+import VueLocalStorage from 'vue-localstorage';
+
+Vue.use(VueLocalStorage)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -24,16 +27,18 @@ Vue.filter("formatNumber", function (value) {
   return numeral(value).format("0,0"); 
 });
 
-//var url = 'http://asociadosbe.com';
-var url = 'http://localhost:8000';
+var url = 'http://asociadosbe.com';
+//var url = 'http://localhost:8000';
+
+var token = Vue.localStorage.get('token');
+token = token ? token:'';
 
 const api = axios.create({
     baseURL: url,
     headers: {
         common: {
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'Authorization': "Beauty ",
+            'content-type': 'application/json',
+            'Authorization': "Beauty "+token
         },
         post: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -58,7 +63,10 @@ const app = new Vue({
             discount_service : 0,
             value_service : 0,
             discount_service_edit : 0,
-            value_service_edit : 0
+            value_service_edit : 0,
+            email: '',
+            password: '',
+            messageLogin: ''
         }
     },
     methods:{
@@ -75,14 +83,14 @@ const app = new Vue({
         getServices(){
             api.get('api/services')
             .then(response => {
-                
-                if(response){
+                // JSON responses are automatically parsed.
+                var res = response.data
+                if(res.response){
                     // JSON responses are automatically parsed.
-                    this.servicesData = response.data
+                    this.servicesData = res.data
                 }else{
-                    return window.location.replace('/')
+                    $("#logout-form").submit()
                 }
-
             })
             .catch(e => {
                 console.log(e)
@@ -91,8 +99,13 @@ const app = new Vue({
         getOrders(){
             api.get('api/orders')
             .then(response => {
-                // JSON responses are automatically parsed.
-                this.ordersData = response.data
+                var res = response.data
+                if(res.response){
+                    // JSON responses are automatically parsed.
+                    this.ordersData = res.data
+                }else{
+                    $("#logout-form").submit()
+                }
             })
             .catch(e => {
                 console.log(e)
@@ -134,11 +147,49 @@ const app = new Vue({
             }
 
             return status;
+        },
+        submit(e) {
+            if(this.email =='' || this.password == ''){
+                $("#sendLogin").submit()
+            }else{
+                api.post('api/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    var res = response.data
+                    if(res.response){
+                        Vue.localStorage.set('token', res.data.token);
+                        this.messageLogin = res.message
+                        $("#sendLogin").submit()
+                    }else{
+                        this.messageLogin = res.message
+                        $("#sendLogin").submit()
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+                return;
+            }
+
+        },
+        closeSe(e){
+            e.preventDefault();
+            Vue.localStorage.remove('token')
+            $("#logout-form").submit()
         }
     },
     created(){
         this.getServices();
         this.getOrders();
+        var host = window.location.href ;
+        if(host.split("/")[3] == 'home'){
+            if(token == ''){
+                $("#logout-form").submit()
+            }
+        }
     },
     mounted(){
         $('#showProm').modal('show')

@@ -35,3 +35,7 @@ Route::post('/update_service', 'ServicesController@update_service');
 
 Route::get('/catalog', 'CatalogController@catalog')->name('catalog');
 
+//orders
+
+Route::post('update_order_status', 'ProductController@changeStatus')->name('change');
+

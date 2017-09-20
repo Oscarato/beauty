@@ -20,23 +20,37 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 */
 
 Route::middleware(CheckToken::class)->get('/services', function (Request $request) {
+    
     $services = new Services;
     $servicesData = $services->getServices();
     
-    return json_encode($servicesData);
+    return response()->json([
+        'message' => 'Correcto',
+        'response' => true,
+        'data' => $servicesData
+    ]);
+
 })->middleware('cors');
 
 Route::middleware(CheckToken::class)->get('/orders', function (Request $request) {
+
     $orders = new Orders;
-    $ordersData = $orders->getOrders();
-    
-    return json_encode($ordersData);
+    $ordersData = $orders->getOrders((object) array(
+        'profile' => $request->profile,
+        'document' => $request->document
+    ));
+
+    return response()->json([
+        'message' => 'Correcto',
+        'response' => true,
+        'data' => $ordersData
+    ]);
+
 })->middleware('cors');
 
 Route::post('/login', function (Request $request) {
     
     $users = new User;
-    
 
     if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
 
@@ -47,20 +61,30 @@ Route::post('/login', function (Request $request) {
 
         $token = (new Builder())->setIssuer('http://www.be.land') // Configures the issuer (iss claim)
                                 ->setAudience('http://www.be.land') // Configures the audience (aud claim)
-                                ->setId('4f1g23a12aa', true) // Configures the id (jti claim), replicating as a header item
+                                ->setId('bd273e238dc03056fff93c0e1e8de576', true) // Configures the id (jti claim), replicating as a header item
                                 ->setIssuedAt(time()) // Configures the time that the token was issue (iat claim)
-                                ->setNotBefore(time() + 60) // Configures the time that the token can be used (nbf claim)
+                                ->setNotBefore(time() + 1) // Configures the time that the token can be used (nbf claim)
                                 ->setExpiration(time() + 3600) // Configures the expiration time of the token (nbf claim)
                                 ->set('uid', $user[0]->id) // Configures a new claim, called "uid"
-                                ->sign($signer, 'testing') // creates a signature using "testing" as key
+                                ->set('document', $user[0]->document) // Configures a new claim, called "document"
+                                ->set('profile', $user[0]->profile) // Configures a new claim, called "profile"
+                                ->set('uid', $user[0]->id) // Configures a new claim, called "uid"
+                                ->sign($signer, 'be_beauty') // creates a signature using "testing" as key
                                 ->getToken(); // Retrieves the generated token
-                                
-        return $token;
+        
+        return response()->json([
+            'data' => [
+                'token' => (string) $token
+            ],
+            'message' => 'Acceso Correcto',
+            'response' => true
+        ]);
 
     }else{
-        echo 'paila';
-        exit;
+        return response()->json([
+            'message' => 'Usuario y/o contraseña errados',
+            'response' => false
+        ]);
     }
     
-    return json_encode($ordersData);
 })->middleware('cors');

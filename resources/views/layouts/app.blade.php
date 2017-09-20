@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img width="40" src="img/531.png">
+                        <img width="40" src="<?php echo url('img/531.png') ?>">
                     </a>
                 </div>
 
@@ -59,20 +59,20 @@
                                         </a>
                                     </li>
                                     @if(Auth::user()->profile == 1)
-                                        <li>
-                                            <a href="{{ route('services') }}">
-                                                Servicios y/o Promociones
-                                            </a>
-                                        </li>
+                                    <li>
+                                        <a href="{{ route('services') }}">
+                                            Servicios y/o Promociones
+                                        </a>
+                                    </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                            @click="closeSe($event)"
+                                            >
                                             Salir de la Plataforma
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form"  action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>

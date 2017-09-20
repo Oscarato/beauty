@@ -64,4 +64,29 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     * Permite actualizar el estado de las ordenes
+     */
+    public function changeStatus(){
+        
+        session()->regenerate();
+        $order = new Orders;
+
+        //para actualizar
+        $update = $order->updateStatus(array(
+            '_id' => $this->request['_id'],
+            'status' => $this->request['status']
+        ));
+        
+        if($update['success']){
+            
+            session(['status' => 'success']);
+            return redirect("home")->with('message','La orden fue actualizada correctamente');
+
+        }else{
+            session(['status' => 'error']);
+            return redirect("orders")->with('message','No se pudo actualizar la orden');
+        }
+    } 
+
 }

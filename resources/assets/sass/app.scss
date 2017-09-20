@@ -15,7 +15,7 @@ a {
 a:hover, a:focus {
     color: #ef0062;
     text-decoration: underline;
-}
+} 
 
 .panel-default > .panel-heading {
     color: #b00000;
@@ -57,6 +57,29 @@ h3, .h3 {
 p {
     color: #b00000;
 }
+
 .carousel-caption {
     text-align: right;
+}
+
+input, button, select, textarea {
+    font-family: sans-serif;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.col-md-12 {
+    overflow: auto;
+}
+
+@media (max-width: 600px) {
+
+    .carousel-inner > .item {
+        padding: 0;
+    }
+
+    .carousel-caption {
+        text-align: right;
+        top: 141px;
+    }
 }

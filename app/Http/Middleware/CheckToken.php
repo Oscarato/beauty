@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Request;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\ValidationData;
 
 class CheckToken
 {
@@ -16,12 +18,45 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
+        
         $all_headers = Request::header('Authorization');
+
         if($all_headers){
-            return $next($request);
+            $token = isset(explode('Beauty', $all_headers)[1]) ? explode('Beauty', $all_headers)[1]:null;
+
+            if($token){
+
+                $data = new ValidationData(); // It will use the current time to validate (iat, nbf and exp)
+                $data->setIssuer('http://www.be.land');
+                $data->setAudience('http://www.be.land');
+                $data->setId('bd273e238dc03056fff93c0e1e8de576');
+                
+                $token = (new Parser())->parse((string) $token); // Parses from a string
+
+                if($token->validate($data)){
+                    
+                    $request->userid = $token->getClaim('uid');
+                    $request->document = $token->getClaim('document');
+                    $request->profile = $token->getClaim('profile');
+                    return $next($request);
+
+                }else{
+
+                    return response()->json([
+                        'message' => 'El token es erroneo',
+                        'response' => false
+                    ]);
+
+                }
+            }else{
+                
+                return response()->json([
+                    'message' => 'El token esta mal formado',
+                    'response' => false
+                ]);
+            }
         }else{
             return redirect('home');
         }
-        
     }
 }

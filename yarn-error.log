@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Oscar Jimenez\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add numeral
+  C:\Program Files\nodejs\node.exe C:\Users\Oscar Jimenez\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add vue-ls
 
 PATH: 
   C:\ProgramData\Oracle\Java\javapath;C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\Program Files\BackupClient\CommandLineTool\;C:\Program Files\BackupClient\PyShell\bin\;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft Emulator Manager\1.0\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Python27;C:\Program Files (x86)\Windows Kits\10\Microsoft Application Virtualization\Sequencer\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\xampp7\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Cloud Foundry;C:\Program Files\Java\jdk1.8.0_65\bin;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Oscar Jimenez\AppData\Local\Microsoft\WindowsApps;C:\Users\Oscar Jimenez\AppData\Roaming\npm;C:\Users\Oscar Jimenez\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk1.8.0_65\bin;
@@ -34,6 +34,9 @@ npm manifest:
       "laravel-mix": "0.*",
       "lodash": "^4.17.4",
       "vue": "^2.1.10"
+    },
+    "dependencies": {
+      "numeral": "^2.0.6"
     }
   }
 
@@ -6072,4 +6075,4 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\xampp7\htdocs\be_platform\node_modules\node-sass\vendor\win32-x64-51\binding.node'
+  Error: EPERM: operation not permitted, unlink 'C:\xampp7\htdocs\beland\node_modules\node-sass\vendor\win32-x64-51\binding.node'

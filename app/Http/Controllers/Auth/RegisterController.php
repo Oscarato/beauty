@@ -63,6 +63,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        /*
+        # Instantiate the client\
+        $mailin = new Mailin("https://api.sendinblue.com/v2.0","7t3U8p4HDKOWQXEm");
+        $mailin->get_account();
+
+        //enviamos el correo electronico
+        $data = array( "to" => array("oscarato1993@gmail.com" => 'Oscar Jimenez'),
+            "from" => array("oscar.jimenez_ingenieria@be.land", "Soporte Be"),
+            "subject" => 'Bienvenido A Be',
+            "html" => '<!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Bienvenido a Be</title>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <div><b>Bienvenido a Be</b></div><br>
+                    <div>Ahora estas registrado como asociado en la plataforma</div><br>
+                    <div>Solo ingresa y podrás generar tus propios ingresos.</div>
+                    <br>
+                    <div><b>Be</b></div>
+                </body>
+            </html>',
+        );
+
+        $mailin->send_email($data);
+        */
         
         # Instantiate the client\
         $mailin = new Mailin("https://api.sendinblue.com/v2.0","7t3U8p4HDKOWQXEm");
