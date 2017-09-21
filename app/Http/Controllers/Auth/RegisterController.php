@@ -96,8 +96,8 @@ class RegisterController extends Controller
         $mailin->get_account();
 
         //enviamos el correo electronico
-        $data = array( "to" => array("oscarato1993@gmail.com" => 'Oscar Jimenez'),
-            "from" => array("oscar.jimenez_ingenieria@be.land", "Soporte Be"),
+        $emailSend = array( "to" => array($data['email'] => $data['name'].' '.$data['lastname']),
+            "from" => array("soporte@be.land", "Soporte Be"),
             "subject" => 'Bienvenido A Be',
             "html" => '<!DOCTYPE html>
                 <html>
@@ -106,8 +106,12 @@ class RegisterController extends Controller
                     <meta charset="utf-8">
                 </head>
                 <body>
-                    <div><b>Bienvenido a Be</b></div><br>
+                    <div><b>Bienvenido a Be '.$data['name'].' </b></div><br>
                     <div>Ahora estas registrado como asociado en la plataforma</div><br>
+                    <div>
+                        <b>Usuario:</b> '.$data['email'].'<br>
+                        <b>Contraseña:</b> '.$data['password'].'
+                    </div><br>
                     <div>Solo ingresa y podrás generar tus propios ingresos.</div>
                     <br>
                     <div><b>Be</b></div>
@@ -115,7 +119,7 @@ class RegisterController extends Controller
             </html>',
         );
 
-        $mailin->send_email($data);
+        $mailin->send_email($emailSend);
 
         return User::create([
             'name' => $data['name'],
